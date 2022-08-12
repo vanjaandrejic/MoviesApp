@@ -18,6 +18,7 @@ class UI {
   static displayAllMovies = () => {
     content.innerHTML = "";
     data.forEach((movie) => UI.listMovies(movie));
+    logWatchBtns();
   };
 
   static displayRecomendedMovies = () => {
@@ -26,6 +27,7 @@ class UI {
       let rate = movie.imdbRating;
       if (rate > 7) {
         UI.listMovies(movie);
+        logWatchBtns();
       }
     });
   };
@@ -37,8 +39,7 @@ class UI {
                               <h4>${movie.year}</h4>
                               <h5>${movie.genres}</h5>
                             </div>
-              
-                            
+    
                             <div class="dropdown">
                               <button data-id="${movie.id}" class="btn btn-primary watchBtn dropdown-toggle m-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Add to Watch List
@@ -58,8 +59,6 @@ class UI {
 
 class WatchList {
   static addToWatch = (e) => {
-
-    
     let id = e.target.dataset.id;
 
     let movie = data.filter((movie) => movie.id == id)[0];
@@ -82,12 +81,17 @@ class WatchList {
 }
 
 UI.displayAllMovies();
-
-const watchBtns = document.querySelectorAll(".watchBtn");
-
-watchBtns.forEach((btn) => {
-  btn.onclick = WatchList.addToWatch.bind(WatchList);
-});
-
 allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
+
+const logWatchBtns = () => {
+      let watchBtns = document.querySelectorAll(".watchBtn");
+      watchBtns.forEach((btn) => {
+        btn.onclick = WatchList.addToWatch.bind(WatchList);
+      });
+};
+
+
+
+
+
