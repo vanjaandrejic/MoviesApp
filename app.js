@@ -10,10 +10,6 @@ const watchListText = document.querySelector(".watch_list_text");
 
 let dailyWatchList = [];
 
-
-
-//console.log(data);
-
 class UI {
   static displayAllMovies = () => {
     content.innerHTML = "";
@@ -44,21 +40,9 @@ class UI {
                               <h3>${movie.title}</h3>
                               <h4>${movie.year}</h4>
                               <h5>${movie.genres}</h5>
-                            </div>
-    
-                            <div class="dropdown">
-                              <button data-id="${movie.id}" class="btn btn-primary watchBtn dropdown-toggle m-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Add to Watch List
-                              </button>
-                              <ul class="dropdown-menu bg-secondary">
-                                <li><a class="dropdown-item" href="#">Monday</a></li>
-                                <li><a class="dropdown-item" href="#">Thuesday</a></li>
-                                <li><a class="dropdown-item" href="#">Wednesday</a></li>
-                                <li><a class="dropdown-item" href="#">Thursday</a></li>
-                                <li><a class="dropdown-item" href="#">Friday</a></li>
-                                <li><a class="dropdown-item" href="#">Saturday</a></li>
-                                <li><a class="dropdown-item" href="#">Sunday</a></li>
-                              </ul>
+
+                              <button data-id="${movie.id}" class="btn watchBtn btn-primary">Add to Watch List</button>
+
                             </div>`;
   };
 }
@@ -79,19 +63,42 @@ class WatchList {
     watchList.innerHTML = "";
 
     dailyWatchList.forEach((movie) => {
-      watchList.innerHTML += `<h3>${movie.title}</h3>`;
+      watchList.innerHTML += `<div class="d-flex align-items-center">
+                
+                                <h3>${movie.title}</h3>
+
+                                <div class="dropdown">
+                                  <button data-id="${movie.id}" class="btn btn-primary watchBtn dropdown-toggle m-4 btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Choose day
+                                  </button>
+                                    <ul class="dropdown-menu bg-secondary day_links">
+                                      <li><a id="monday" class="dropdown-item dayLink" href="#">Monday</a></li>
+                                      <li><a id="thuesday" class="dropdown-item dayLink" href="#">Thuesday</a></li>
+                                      <li><a id="wednesday" class="dropdown-item dayLink" href="#">Wednesday</a></li>
+                                      <li><a id="thursday" class="dropdown-item dayLink" href="#">Thursday</a></li>
+                                      <li><a id="friday" class="dropdown-item dayLink" href="#">Friday</a></li>
+                                      <li><a id="saturday" class="dropdown-item dayLink" href="#">Saturday</a></li>
+                                      <li><a id="sunday" class="dropdown-item dayLink" href="#">Sunday</a></li>
+                                    </ul>
+                                </div>
+     
+                              </div>`;
     });
 
     watchListText.style.display = "block";
+
+    let dayBtns = document.querySelectorAll(".dayLink");
+        dayBtns.forEach((btn) => {
+          btn.onclick = WatchList.chooseDay.bind(WatchList);
+        });
+
+  };
+
+  static chooseDay = () => {
+    console.log("clicked");
   };
 }
 
 UI.displayAllMovies();
 allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
-
-
-
-
-
-
