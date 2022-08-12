@@ -8,6 +8,8 @@ const recomendedBtn = document.querySelector(".recomendedBtn");
 const watchList = document.querySelector(".watch_list");
 const watchListText = document.querySelector(".watch_list_text");
 
+const downloadCsvBtn = document.querySelector(".downloadCsv"); 
+
 let dailyWatchList = [];
 
 class UI {
@@ -91,8 +93,24 @@ class WatchList {
         dayBtns.forEach((btn) => {
           btn.onclick = WatchList.chooseDay.bind(WatchList);
         });
-
   };
+
+  static downloadCsv = () => {
+    let csv = "";
+    dailyWatchList.forEach((movie) => {
+      csv += movie.title + "\n";
+    });
+
+    let myBlob = new Blob([csv], {type: "text/csv"});
+    let url = window.URL.createObjectURL(myBlob);
+    let anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "demo.csv";
+
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+    anchor.remove();
+  }
 
   static chooseDay = () => {
     console.log("clicked");
@@ -102,3 +120,4 @@ class WatchList {
 UI.displayAllMovies();
 allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
+downloadCsvBtn.onclick = WatchList.downloadCsv.bind(WatchList);
