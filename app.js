@@ -18,7 +18,10 @@ class UI {
   static displayAllMovies = () => {
     content.innerHTML = "";
     data.forEach((movie) => UI.listMovies(movie));
-    logWatchBtns();
+    let watchBtns = document.querySelectorAll(".watchBtn");
+    watchBtns.forEach((btn) => {
+      btn.onclick = WatchList.addToWatch.bind(WatchList);
+    });
   };
 
   static displayRecomendedMovies = () => {
@@ -27,7 +30,10 @@ class UI {
       let rate = movie.imdbRating;
       if (rate > 7) {
         UI.listMovies(movie);
-        logWatchBtns();
+        let watchBtns = document.querySelectorAll(".watchBtn");
+        watchBtns.forEach((btn) => {
+          btn.onclick = WatchList.addToWatch.bind(WatchList);
+        });
       }
     });
   };
@@ -84,12 +90,6 @@ UI.displayAllMovies();
 allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
 
-const logWatchBtns = () => {
-      let watchBtns = document.querySelectorAll(".watchBtn");
-      watchBtns.forEach((btn) => {
-        btn.onclick = WatchList.addToWatch.bind(WatchList);
-      });
-};
 
 
 
