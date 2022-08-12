@@ -8,9 +8,11 @@ const recomendedBtn = document.querySelector(".recomendedBtn");
 const watchList = document.querySelector(".watch_list");
 const watchListText = document.querySelector(".watch_list_text");
 
-const dailyWatchList = [];
+let dailyWatchList = [];
 
-console.log(data);
+
+
+//console.log(data);
 
 class UI {
   static displayAllMovies = () => {
@@ -38,7 +40,7 @@ class UI {
               
                             
                             <div class="dropdown">
-                              <button data-id="${movie.id}" data-title="${movie.title}" class="btn btn-primary watchBtn dropdown-toggle m-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button data-id="${movie.id}" class="btn btn-primary watchBtn dropdown-toggle m-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Add to Watch List
                               </button>
                               <ul class="dropdown-menu bg-secondary">
@@ -55,24 +57,28 @@ class UI {
 }
 
 class WatchList {
-    static addToWatch = (e) => {
-        let id = e.target.dataset.id;
+  static addToWatch = (e) => {
 
-        let movie = data.filter((movie)=> movie.id == id)[0];
-        console.log(movie);
+    
+    let id = e.target.dataset.id;
 
-        if (!dailyWatchList.includes(movie)) {
-            dailyWatchList.push(this.movie);
-          }
+    let movie = data.filter((movie) => movie.id == id)[0];
+    console.log(movie);
 
-          watchList.innerHTML = "";
-
-            dailyWatchList.forEach((movie) => {
-                watchList.innerHTML += `<h3>${movie.title}</h3>`;
-        });
-
-            watchListText.style.display = "block";
+    if (!dailyWatchList.includes(movie)) {
+      dailyWatchList.push(movie);
     }
+
+    console.log(dailyWatchList);
+
+    watchList.innerHTML = "";
+
+    dailyWatchList.forEach((movie) => {
+      watchList.innerHTML += `<h3>${movie.title}</h3>`;
+    });
+
+    watchListText.style.display = "block";
+  };
 }
 
 UI.displayAllMovies();
