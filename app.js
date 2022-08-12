@@ -13,6 +13,16 @@ class UI {
         data.forEach((movie) => UI.listMovies(movie));
     };
 
+    static displayRecomendedMovies = () => {
+        content.innerHTML = "";
+            data.forEach((movie) => {
+                let rate = movie.imdbRating;
+                if (rate > 7) {
+                UI.listMovies(movie);
+                }
+            });
+    }
+
     static listMovies = (movie) => {
         content.innerHTML += `<div class="card col-md-3 col-sm-12 m-3">
                             <div class="m-3">
@@ -25,4 +35,5 @@ class UI {
     }
 }
 
-UI.displayAllMovies();
+//UI.displayAllMovies();
+UI.displayRecomendedMovies();
