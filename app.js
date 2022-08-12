@@ -35,5 +35,9 @@ class UI {
     }
 }
 
-//UI.displayAllMovies();
-UI.displayRecomendedMovies();
+UI.displayAllMovies();
+
+allBtn.onclick = UI.displayAllMovies.bind(UI);
+recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
+
+
