@@ -68,6 +68,23 @@ class UI {
       }
     });
   }
+
+  static filterGenre = (e) => {
+    content.innerHTML = "";
+    let genre = e.target.id;
+    data.forEach((movie)=> {
+      movie.genres.forEach((singleGenre) => {
+        if(singleGenre.toLocaleLowerCase().includes(genre.toLocaleLowerCase())){
+          UI.listMovies(movie);
+          let watchBtns = document.querySelectorAll(".watchBtn");
+          watchBtns.forEach((btn) => {
+            btn.onclick = WatchList.addToWatch.bind(WatchList);
+          });
+        }    
+      })
+    })
+    
+  }
 }
 
 class WatchList {
@@ -143,3 +160,10 @@ allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
 downloadCsvBtn.onclick = WatchList.downloadCsv.bind(WatchList);
 searchInput.oninput = UI.searchMovies.bind(UI);
+
+let genreLinks = document.querySelectorAll(".genreLink");
+        genreLinks.forEach((btn)=> {
+        btn.onclick = UI.filterGenre.bind(UI);
+    });
+
+

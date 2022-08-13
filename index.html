@@ -21,14 +21,31 @@
         <div class="col-12 text-center mt-4">
             <button class="btn allBtn btn-lg btn-outline-primary m-2">All Movies</button>
             <button class="btn recomendedBtn btn-lg btn-outline-primary m-2">Recomended Movies</button>
+
             <div class="d-flex justify-content-center mt-2">
               <form class="d-flex" role="search">
                 <input class="form-control me-2 bg-light search_input" type="search" placeholder="Search..." aria-label="Search">
-                <button class="btn btn-primary" type="submit">Search</button>
               </form>
             </div>
 
+            <div class="dropdown">
+              <button class="btn btn-primary  dropdown-toggle m-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select by Genre</button>
+              <ul class="dropdown-menu bg-light day_links">
+                <li><a id="action" class="dropdown-item genreLink" href="#">Action</a></li>
+                <li><a id="adventure" class="dropdown-item genreLink" href="#">Advanture</a></li>
+                <li><a id="crime" class="dropdown-item genreLink" href="#">Crime</a></li>
+                <li><a id="comedy" class="dropdown-item genreLink" href="#">Comendy</a></li>
+                <li><a id="drama" class="dropdown-item genreLink" href="#">Drama</a></li>
+                <li><a id="fantasy" class="dropdown-item genreLink" href="#">Fantasy</a></li>
+                <li><a id="horror" class="dropdown-item genreLink" href="#">Horror</a></li>
+                <li><a id="sci-fi" class="dropdown-item genreLink" href="#">Sci-Fi</a></li>
+              </ul>
+            </div>
+            
         </div>
+
+        
+
 
         
               <div class="col">
