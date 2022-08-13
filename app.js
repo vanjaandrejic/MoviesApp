@@ -8,7 +8,9 @@ const recomendedBtn = document.querySelector(".recomendedBtn");
 const watchList = document.querySelector(".watch_list");
 const watchListText = document.querySelector(".watch_list_text");
 
-const downloadCsvBtn = document.querySelector(".downloadCsv"); 
+const downloadCsvBtn = document.querySelector(".downloadCsv");
+
+const searchInput = document.querySelector(".search_input");
 
 let dailyWatchList = [];
 
@@ -37,16 +39,35 @@ class UI {
   };
 
   static listMovies = (movie) => {
-    content.innerHTML += `<div class="card col-md-3 col-sm-12 m-3">
+    content.innerHTML += `<div class="card col-md-3 col-sm-12 m-3 bg-light">
                             <div class="m-3">
-                              <h3>${movie.title}</h3>
-                              <h4>${movie.year}</h4>
-                              <h5>${movie.genres}</h5>
+                                <div>
+                                  <h3>${movie.title}</h3>
+                                  <h4>${movie.year}</h4>
+                                  <h5>${movie.genres}</h5>
+                                </div>
 
-                              <button data-id="${movie.id}" class="btn watchBtn btn-primary">Add to Watch List</button>
-
+                                <div>
+                                  <button data-id="${movie.id}" class="btn watchBtn btn-primary">Add to Watch List</button>
+                                </div>
+                              </div>
                             </div>`;
   };
+
+  static searchMovies = (e) => {
+    content.innerHTML = "";
+    let value = e.target.value;
+    data.forEach((movie) => {
+      let title = movie.title;
+      if (title.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+        UI.listMovies(movie);
+        let watchBtns = document.querySelectorAll(".watchBtn");
+        watchBtns.forEach((btn) => {
+          btn.onclick = WatchList.addToWatch.bind(WatchList);
+        });
+      }
+    });
+  }
 }
 
 class WatchList {
@@ -121,3 +142,4 @@ UI.displayAllMovies();
 allBtn.onclick = UI.displayAllMovies.bind(UI);
 recomendedBtn.onclick = UI.displayRecomendedMovies.bind(UI);
 downloadCsvBtn.onclick = WatchList.downloadCsv.bind(WatchList);
+searchInput.oninput = UI.searchMovies.bind(UI);
