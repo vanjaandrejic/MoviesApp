@@ -11,8 +11,11 @@ const watchListText = document.querySelector(".watch_list_text");
 const downloadCsvBtn = document.querySelector(".downloadCsv");
 
 const searchInput = document.querySelector(".search_input");
-
+///////////..............
 let dailyWatchList = [];
+
+
+
 
 class UI {
   static displayAllMovies = () => {
